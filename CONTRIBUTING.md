@@ -70,8 +70,8 @@ ttyai/
 ├── build-iso.sh                   # Build ISOs
 ├── build.sh                       # Build Docker edition
 ├── test-rootfs.sh                 # 34 automated tests
-└── docs/
-    └── display-debug-log.md       # UTM display debugging notes
+└── demo/
+    └── ttyai-demo.gif             # Demo GIF for README
 ```
 
 ## License

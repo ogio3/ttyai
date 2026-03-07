@@ -1,5 +1,6 @@
 dist/
 *.iso
+*.cast
 .DS_Store
 node_modules/
 
