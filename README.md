@@ -4,6 +4,10 @@ A Linux distribution where the only interface is an AI coding agent.
 
 No shell. No desktop. No escape.
 
+<p align="center">
+  <img src="demo/ttyai-demo.gif" alt="ttyai demo" width="600">
+</p>
+
 ## Overview
 
 ```

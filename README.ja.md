@@ -4,6 +4,10 @@ AIコーディングエージェントだけがインターフェースの Linux
 
 シェルなし。デスクトップなし。逃げ場なし。
 
+<p align="center">
+  <img src="demo/ttyai-demo.gif" alt="ttyai demo" width="600">
+</p>
+
 ## 概要
 
 ```
