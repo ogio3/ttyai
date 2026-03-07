@@ -48,29 +48,27 @@ ISO は EFI ブート対応の x86_64 / ARM64 マシンで動作するはず。V
 
 Claude Code は2つの方法で認証できる:
 
-- **Claude Pro/Max サブスクリプション**（OAuth）— おそらく動作するが、まだ十分に確認できていない。試した方は[報告してもらえると助かります](https://github.com/ogio3/ttyai/issues)。
-- **API key** — `ttyai.key=` カーネルパラメータで設定可能（下記参照）。
+- **OAuth**（Claude Pro / Max / Team サブスクリプション）— 画面に URL が表示される。ホストマシンのブラウザで開いてログイン。サブスクリプション消費。
+- **API key** — 環境変数 `ANTHROPIC_API_KEY` を設定。OAuth を完全スキップ。[APIクレジット](https://console.anthropic.com/)消費（サブスクとは別課金）。
 
-両方のパスを確認でき次第、このセクションを更新する予定。どちらかで動作した方は、ぜひレポートをお願いします。
+### API key を使う
 
-### ペーストの問題
+**Docker:**
 
-UTM の Display ウィンドウはクリップボードペースト（Cmd+V）に対応していない。これはフレームバッファコンソールの[既知の制限](https://github.com/utmapp/UTM/issues/7045)。
+```bash
+docker run -it -e ANTHROPIC_API_KEY=sk-ant-... ttyai/claude
+```
 
-Claude Code が OAuth URL を表示した場合、コピーできない。回避策:
-
-1. URL が表示された UTM ウィンドウの**スクリーンショット**を撮る
-2. OCR ツール（ChatGPT に画像を送る等）で URL を書き起こす
-3. 書き起こした URL をブラウザで開いて認証を完了する
-
-OAuth を省略するには、API key を事前設定する:
+**ISO（カーネルパラメータ）:**
 
 ```
 # UTM: VM Settings → QEMU → Boot Arguments
 ttyai.key=sk-ant-api03-xxxxx
 ```
 
-より良い解決策をご存知であれば [issue を開いてください](https://github.com/ogio3/ttyai/issues)。
+### UTM でのペーストについて
+
+UTM のフレームバッファコンソールは Cmd+V に対応していない（[既知の制限](https://github.com/utmapp/UTM/issues/7045)）。OAuth を使う場合は、表示された URL をスクリーンショットで撮ってホストマシンで開く。
 
 ## アーキテクチャ
 

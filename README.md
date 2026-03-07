@@ -48,29 +48,27 @@ The ISO should work on any x86_64 or ARM64 machine with EFI boot. If you try it 
 
 Claude Code supports two ways to authenticate:
 
-- **Claude Pro/Max subscription** (OAuth) — should work, but I haven't fully verified this yet. If you try it, please [let me know](https://github.com/ogio3/ttyai/issues).
-- **API key** — should also work via the `ttyai.key=` kernel parameter (see below).
+- **OAuth** (Claude Pro / Max / Team subscription) — Claude Code displays a URL on screen. Open it in your host browser to log in. Uses your subscription.
+- **API key** — Set `ANTHROPIC_API_KEY` as an environment variable. Skips OAuth entirely. Uses [API credit](https://console.anthropic.com/) (separate from your subscription).
 
-I'll update this section once I've confirmed both paths. If you get either one working, I'd appreciate a report.
+### Using an API key
 
-### The paste problem
+**Docker:**
 
-UTM's display window does not support clipboard paste (Cmd+V). This is a [known limitation](https://github.com/utmapp/UTM/issues/7045) of framebuffer consoles.
+```bash
+docker run -it -e ANTHROPIC_API_KEY=sk-ant-... ttyai/claude
+```
 
-When Claude Code shows an OAuth URL you need to open in a browser, you can't copy it. Workaround:
-
-1. Take a screenshot of the UTM window showing the URL
-2. Use an OCR tool (e.g. ChatGPT with the image) to transcribe the URL
-3. Open the transcribed URL in your browser to complete authentication
-
-To skip OAuth entirely, you can pre-configure an API key:
+**ISO (kernel parameter):**
 
 ```
 # UTM: VM Settings → QEMU → Boot Arguments
 ttyai.key=sk-ant-api03-xxxxx
 ```
 
-If you find a better way to deal with this, please [open an issue](https://github.com/ogio3/ttyai/issues).
+### Note on UTM paste
+
+UTM's framebuffer console does not support Cmd+V ([known limitation](https://github.com/utmapp/UTM/issues/7045)). If you use OAuth, screenshot the URL and open it on your host machine.
 
 ## Architecture
 
