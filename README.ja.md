@@ -70,6 +70,8 @@ docker run -it -e ANTHROPIC_API_KEY=sk-ant-... ttyai/claude
 ttyai.key=sk-ant-api03-xxxxx
 ```
 
+カーネルコマンドラインは VM 内の全プロセスから読める（`/proc/cmdline`）。ライブ ISO（ディスク書き込みなし）なので問題ない。
+
 ### UTM でのペーストについて
 
 UTM のフレームバッファコンソールは Cmd+V に対応していない（[既知の制限](https://github.com/utmapp/UTM/issues/7045)）。OAuth を使う場合は、表示された URL をスクリーンショットで撮ってホストマシンで開く。

@@ -70,6 +70,8 @@ docker run -it -e ANTHROPIC_API_KEY=sk-ant-... ttyai/claude
 ttyai.key=sk-ant-api03-xxxxx
 ```
 
+The kernel command line is readable by any process inside the VM (`/proc/cmdline`). This is fine for a live ISO that doesn't write to disk.
+
 ### Note on UTM paste
 
 UTM's framebuffer console does not support Cmd+V ([known limitation](https://github.com/utmapp/UTM/issues/7045)). If you use OAuth, screenshot the URL and open it on your host machine.
