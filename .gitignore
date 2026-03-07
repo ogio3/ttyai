@@ -1,0 +1,20 @@
+dist/
+*.iso
+.DS_Store
+node_modules/
+
+# Editor/tool configs (local only)
+CLAUDE.md
+.claude/
+.codex/
+.cursor/
+.cursorrules
+.copilot/
+.github/copilot/
+.aider*
+.continue/
+.windsurf/
+.codeium/
+.tabby/
+.sourcegraph/
+.devcontainer/

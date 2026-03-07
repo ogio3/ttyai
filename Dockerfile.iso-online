@@ -1,0 +1,42 @@
+# ttyai ISO Builder — Online Edition (net-install)
+# Supports both ARM64 and x86_64 via docker buildx --platform
+FROM alpine:3.21 AS builder
+ARG TARGETARCH
+
+RUN apk add --no-cache \
+    linux-lts \
+    grub \
+    grub-efi \
+    xorriso \
+    mtools \
+    dosfstools \
+    nodejs \
+    npm \
+    coreutils \
+    curl \
+    git \
+    openssh-client \
+    cpio \
+    ca-certificates \
+    zstd \
+    && if [ "$TARGETARCH" = "amd64" ]; then apk add --no-cache grub-bios || true; fi \
+    && rm -rf /var/cache/apk/*
+
+RUN mkdir -p /iso/boot/grub /iso/boot/efi
+
+WORKDIR /build
+
+COPY iso/ttyai-init.sh /build/ttyai-init.sh
+COPY iso/ttyai-interactive.sh /build/ttyai-interactive.sh
+COPY iso/build-rootfs.sh /build/build-rootfs.sh
+RUN chmod +x /build/ttyai-init.sh /build/ttyai-interactive.sh /build/build-rootfs.sh
+COPY iso/grub.cfg /iso/boot/grub/grub.cfg
+
+RUN mkdir -p /rootfs && /build/build-rootfs.sh online
+
+RUN cp /boot/vmlinuz-lts /iso/boot/vmlinuz
+
+RUN grub-mkrescue -o /build/ttyai.iso /iso/ 2>&1
+
+FROM scratch AS output
+COPY --from=builder /build/ttyai.iso /ttyai.iso

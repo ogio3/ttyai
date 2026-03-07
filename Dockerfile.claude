@@ -1,0 +1,26 @@
+# ttyai — Claude Code Edition
+# The only interface is Claude Code. No shell. No escape.
+FROM alpine:3.21
+
+RUN apk add --no-cache \
+    nodejs \
+    npm \
+    git \
+    curl \
+    openssh-client \
+    coreutils \
+    shadow \
+    && rm -rf /var/cache/apk/*
+
+# Install Claude Code globally
+RUN npm install -g @anthropic-ai/claude-code
+
+# Create ttyai user
+RUN useradd -m ttyai
+
+# The entrypoint — there is no escape
+ENV HOME=/home/ttyai
+WORKDIR /home/ttyai
+USER ttyai
+
+ENTRYPOINT ["/usr/local/bin/claude"]

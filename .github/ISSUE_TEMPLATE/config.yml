@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussion
+    url: https://github.com/ogio3/ttyai/discussions
+    about: General questions, ideas, show & tell
